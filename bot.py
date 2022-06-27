@@ -1,5 +1,4 @@
 import asyncio
-from enum import auto
 import logging
 
 from markup import buy_menu
@@ -7,7 +6,6 @@ from markup import buy_menu
 from aiogram import Bot, types
 from aiogram.utils import executor
 from aiogram.dispatcher import Dispatcher
-from aiogram.types.message import ContentType
 
 from dotenv import dotenv_values
 
