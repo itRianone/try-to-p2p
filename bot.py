@@ -1,5 +1,4 @@
 import asyncio
-from enum import auto
 import logging
 
 from markup import buy_menu
@@ -7,7 +6,6 @@ from markup import buy_menu
 from aiogram import Bot, types
 from aiogram.utils import executor
 from aiogram.dispatcher import Dispatcher
-from aiogram.types.message import ContentType
 
 from dotenv import dotenv_values
 
@@ -15,7 +13,7 @@ from pyqiwip2p import QiwiP2P
 
 config = dotenv_values(".env")
 
-amount = 5 # cost of item
+amount = 1 # cost of item
 lifetime = 10 # mins bill will be living 
 comment = 'hi' # comment in bill
 
@@ -32,7 +30,7 @@ dp = Dispatcher(bot, loop=loop)
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
     bill = p2p.bill(amount=amount, lifetime=lifetime, comment=comment)
-
+    
     #alt_url redirect to pay url
     await bot.send_message(message.from_user.id, f'payment_url: {bill.alt_url}', 
                             parse_mode='html',
@@ -49,3 +47,4 @@ async def check(callback: types.CallbackQuery):
 
 if __name__ == '__main__':
     executor.start_polling(dp, loop=loop)
+
